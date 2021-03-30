@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+
+import React, {useState, useEffect} from 'react'
 import './App.css';
+import Card from './components/Card'
+import Nav from './components/Nav'
+import { Constant, Request} from './service/index'
+
+const {TOP_STORIES, MOST_POPULAR} = Constant
 
 function App() {
+
+  const [results, setResults] = useState([]);
+ 
+  useEffect(()=>{
+    let request = new Request(TOP_STORIES);
+    request.get()
+    .then(articles => setResults(articles)) 
+    .catch(err => console.log(err));
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+    <div className="col-md-6 offset-md-3">
+      <Nav />
+      {results.map((result)=>{
+        return (
+           <Card{...result} />
+        )
+      })}
+      </div>
+      
     </div>
   );
 }
