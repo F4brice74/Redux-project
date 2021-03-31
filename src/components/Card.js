@@ -5,11 +5,12 @@ const Card = ({published_date, title, abstract, url, section, img}) => {
         <div className="card d-flex flex-row justify-content-between">
         <div className="d-flex">
           <img
-            className="mr-4 rounded"
+            className="mr-4"
             src={img}
             alt="placeholder"
             width="170"
             height="170"
+            style={{padding: '15px', borderRadius: "50% 20% / 10% 40%"}}
           />
           <div className="d-flex flex-column" style={{ width: "75%" }}>
             <p>

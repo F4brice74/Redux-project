@@ -10,17 +10,22 @@ const {TOP_STORIES, MOST_POPULAR} = Constant
 function App() {
 
   const [results, setResults] = useState([]);
+  const[api, setApi] = useState(TOP_STORIES)
  
   useEffect(()=>{
-    let request = new Request(TOP_STORIES);
+    let request = new Request(api);
     request.get()
     .then(articles => setResults(articles)) 
-    .catch(err => console.log(err));
-  }, [])
+    .catch(err => console.log(err))
+    console.log("api :", api)
+  }, [api])
+  const updateRequest = (withApi) => {
+    setApi(withApi)
+  }
   return (
     <div className="container">
     <div className="col-md-6 offset-md-3">
-      <Nav />
+      <Nav updateRequest={updateRequest} />
       {results.map((result)=>{
         return (
            <Card{...result} />
