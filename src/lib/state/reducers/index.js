@@ -43,5 +43,7 @@ export function reducer(state = initialState, action){
                 ...state, 
                 most_popular: action.payload.most_popular
             }
+        default : 
+        return state;
     }
 }
