@@ -11,9 +11,11 @@ const {TOP_STORIES, MOST_POPULAR} = Constant
 
 function App() {
 
-  const [results, setResults] = useState([]);
+  //const [results, setResults] = useState([]);
   const[api, setApi] = useState(TOP_STORIES)
   const dispatch = useDispatch();
+  const state = useSelector((state)=> state)
+  const results = api === TOP_STORIES ? state.top_stories : state.most_popular
  
   useEffect(()=>{
     dispatch(getTopStories())
