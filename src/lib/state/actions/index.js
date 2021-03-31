@@ -48,7 +48,7 @@ export function getTopStories() {
         // on lance la requete avec notre service
         const request = new Request(TOP_STORIES)
         request
-            .get
+            .get()
             .then((results) => {
                 //en cas de réponse on dispatch l'action success
                 dispatch(fetchSuccess());
