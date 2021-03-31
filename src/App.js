@@ -5,7 +5,7 @@ import Card from './components/Card'
 import Nav from './components/Nav'
 import { Constant, Request} from './service/index'
 import { useDispatch, useSelector} from "react-redux"
-import { getTopStories } from './lib/state/actions';
+import { getTopStories, getMostPopular } from './lib/state/actions';
 
 const {TOP_STORIES, MOST_POPULAR} = Constant
 
@@ -17,6 +17,7 @@ function App() {
  
   useEffect(()=>{
     dispatch(getTopStories())
+    dispatch(getMostPopular())
   }, [api])
   const updateRequest = (withApi) => {
     setApi(withApi)

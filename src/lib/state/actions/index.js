@@ -43,9 +43,9 @@ export function fetchMostPopular(results) {
 
 export function getTopStories() {
     return (dispatch) => {
-        //on dispatch notra premiere action
+        //on dispatch notre premiere action
         dispatch(fetchPending());
-        // on lance la requete avec notre service
+        // on crée et on lance la requete avec notre service
         const request = new Request(TOP_STORIES)
         request
             .get()
@@ -58,4 +58,25 @@ export function getTopStories() {
             //en cas d'erreur on dispatch fetc error avec error en param
             .catch((error) => dispatch(fetchError(error)))
     };
+}
+
+//methode async await
+export function getMostPopular(){
+    return async(dispatch) => {
+        //on dispatch notre premiere action
+        dispatch(fetchPending());
+        // on crée  la requete avec notre service
+        const request = new Request(MOST_POPULAR); 
+        // on try and catch la requete
+        try {
+        const results = await request.get()
+        // en cas de succès on lance les actions correspondantes
+        dispatch(fetchSuccess())
+        dispatch(fetchMostPopular(results)) 
+        }
+        catch(err) {
+            //en cas d'erreurs on dispatch l'action error
+            dispatch(fetchError(err))
+        }  
+    }
 }
